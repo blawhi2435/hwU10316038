@@ -1,0 +1,60 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class TextChange extends JFrame{
+	
+	MouseChangeMessage m1 = new MouseChangeMessage("Java is fun");
+	
+	
+	public TextChange(){
+		add(m1);
+	}
+	
+	//inner class
+	class MouseChangeMessage extends JPanel{
+		private String message = "Java is fun";
+		private int x = 200;
+		private int y = 150;
+		// decide next message is fun or powerful
+		private boolean flag = true;
+		public MouseChangeMessage(String s){
+			message = s;
+			addMouseListener(new MouseAdapter(){
+				// when click the mouse then change the message
+				public void mouseClicked(MouseEvent e){
+					flag = !flag;
+					if(!flag)
+						message = "Java is powerful";
+					else
+						message = "Java is fun";
+					// repaint String
+					repaint();
+				}
+			});
+			
+			
+		}
+		
+		//paint String
+		@Override
+		protected void paintComponent(Graphics g){
+			super.paintComponent(g);
+			g.drawString(message, x, y);
+		}
+	}
+	// set frame
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TextChange frame = new TextChange();
+		frame.setTitle("Change message");
+		frame.setSize(500,400);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		
+	}
+	
+	
+
+}
